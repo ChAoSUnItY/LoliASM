@@ -13,9 +13,12 @@ public class AlternateCurrentGameRule {
 
     @SubscribeEvent
     public static void onWorldLoad(WorldEvent.Load event) {
+        if (event.getWorld().isRemote) {
+            return;
+        }
         GameRules gameRules = event.getWorld().getGameRules();
         if (!gameRules.hasRule(KEY)) {
-            LoliLogger.instance.info("Setting {} {} for {}", KEY,LoliConfig.instance.autoAlternateCurrent, event.getWorld().provider.getDimensionType().getName());
+            LoliLogger.instance.info("Setting {} {} for {}", KEY, LoliConfig.instance.autoAlternateCurrent, event.getWorld().provider.getDimensionType().getName());
             gameRules.addGameRule(KEY, Boolean.toString(LoliConfig.instance.autoAlternateCurrent), GameRules.ValueType.BOOLEAN_VALUE);
         }
     }
