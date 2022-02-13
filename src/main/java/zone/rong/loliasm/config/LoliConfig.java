@@ -156,7 +156,7 @@ public class LoliConfig {
         includeAllThreadsWhenProfiling = getBoolean("includeAllThreadsWhenProfiling", "spark", "Allow LoliASM's Spark profiling to include all threads that are present", true);
         sparkSummarizeHeapSpaceAfterGameLoads = getBoolean("sparkSummarizeHeapSpaceAfterGameLoads", "spark", "When Spark is installed, summarize the heap space (/spark heapsummary) when the game finishes loading", false);
 
-        autoAlternateCurrent = getBoolean("autoAlternateCurrent", "redstone", "Automatically have Alternate Current mode on for redstone behaviour, extremely performant. This can also be toggled on/off via /gamerule alternateCurrent ingame per-world", true);
+        autoAlternateCurrent = getBoolean("autoAlternateCurrent", "alternateCurrent", "Automatically have Alternate Current mode on for redstone behaviour, extremely performant. This can also be toggled on/off in-game and per-world via /gamerule alternateCurrent", true);
 
         configuration.save();
     }

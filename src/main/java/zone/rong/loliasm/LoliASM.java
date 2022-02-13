@@ -1,10 +1,12 @@
 package zone.rong.loliasm;
 
 import codechicken.asm.ClassHierarchyManager;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
 import zone.rong.loliasm.api.mixins.RegistrySimpleExtender;
+import zone.rong.loliasm.common.alternatecurrent.AlternateCurrentGameRule;
 import zone.rong.loliasm.config.LoliConfig;
 import zone.rong.loliasm.core.LoliLoadingPlugin;
 import zone.rong.loliasm.proxy.CommonProxy;
@@ -32,6 +34,7 @@ public class LoliASM {
                 }
             };
         }
+        MinecraftForge.EVENT_BUS.register(AlternateCurrentGameRule.class);
     }
 
     @Mod.EventHandler
