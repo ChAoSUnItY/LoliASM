@@ -1,4 +1,4 @@
-package zone.rong.loliasm.common.alternatecurrent.mixins;
+package zone.rong.loliasm.common.alternatecurrent.mixins.impl;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneWire;
@@ -15,6 +15,13 @@ import zone.rong.loliasm.common.alternatecurrent.structure.*;
 
 @Mixin(BlockRedstoneWire.class)
 public class BlockRedstoneWireMixin implements WireBlock {
+
+    @Inject(method = "updateSurroundingRedstone", at = @At("HEAD"), cancellable = true)
+    private void onUpdate(World world, BlockPos pos, IBlockState state, CallbackInfo ci) {
+        if (AlternateCurrentGameRule.isEnabled(world)) {
+            ci.cancel();
+        }
+    }
 
     @Inject(method = "onBlockAdded", at = @At(value = "INVOKE", shift = At.Shift.BEFORE, target = "Lnet/minecraft/block/BlockRedstoneWire;updateSurroundingRedstone(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;)Lnet/minecraft/block/state/IBlockState;"), cancellable = true)
     private void onBlockAdded(World world, BlockPos pos, IBlockState facing, CallbackInfo ci) {

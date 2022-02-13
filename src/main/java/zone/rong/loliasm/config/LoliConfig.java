@@ -74,6 +74,7 @@ public class LoliConfig {
     public boolean fixAmuletHolderCapability;
     public boolean fixFillBucketEventNullPointerException, fixTileEntityOnLoadCME, removeForgeSecurityManager, fasterEntitySpawnPreparation;
     public boolean sparkProfileEntireGameLoad, sparkProfileCoreModLoading, sparkProfileConstructionStage, sparkProfilePreInitializationStage, sparkProfileInitializationStage, sparkProfilePostInitializationStage, sparkProfileLoadCompleteStage, includeAllThreadsWhenProfiling, sparkSummarizeHeapSpaceAfterGameLoads;
+    public boolean autoAlternateCurrent;
 
     private void initialize() {
         configuration = new Configuration(new File(Launch.minecraftHome, "config" + File.separator + "loliasm.cfg"));
@@ -154,6 +155,8 @@ public class LoliConfig {
         sparkProfileLoadCompleteStage = getBoolean("sparkProfileLoadCompleteStage", "spark", "When Spark is installed, profile the loading of FMLLoadCompleteEvent stage", false);
         includeAllThreadsWhenProfiling = getBoolean("includeAllThreadsWhenProfiling", "spark", "Allow LoliASM's Spark profiling to include all threads that are present", true);
         sparkSummarizeHeapSpaceAfterGameLoads = getBoolean("sparkSummarizeHeapSpaceAfterGameLoads", "spark", "When Spark is installed, summarize the heap space (/spark heapsummary) when the game finishes loading", false);
+
+        autoAlternateCurrent = getBoolean("autoAlternateCurrent", "redstone", "Automatically have Alternate Current mode on for redstone behaviour, extremely performant. This can also be toggled on/off via /gamerule alternateCurrent ingame per-world", true);
 
         configuration.save();
     }

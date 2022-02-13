@@ -5,6 +5,18 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "BlockRedstoneWireMixin"
+    "WorldServerMixin",
+    "impl.BlockButtonMixin",
+    "impl.BlockChestMixin",
+    "impl.BlockCompressedPoweredMixin",
+    "impl.BlockDaylightDetectorMixin",
+    "impl.BlockLeverMixin",
+    "impl.BlockMixin",
+    "impl.BlockObserverMixin",
+    "impl.BlockPressurePlateMixin",
+    "impl.BlockRedstoneDiodeMixin",
+    "impl.BlockRedstoneTorchMixin",
+    "impl.BlockRedstoneWireMixin",
+    "impl.BlockTripWireHookMixin"
   ]
 }
