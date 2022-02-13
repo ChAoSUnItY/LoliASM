@@ -18,8 +18,8 @@ public class AlternateCurrentGameRule {
         }
         GameRules gameRules = event.getWorld().getGameRules();
         if (!gameRules.hasRule(KEY)) {
-            LoliLogger.instance.info("Setting {} {} for {}", KEY, LoliConfig.instance.autoAlternateCurrent, event.getWorld().provider.getDimensionType().getName());
-            gameRules.addGameRule(KEY, Boolean.toString(LoliConfig.instance.autoAlternateCurrent), GameRules.ValueType.BOOLEAN_VALUE);
+            LoliLogger.instance.info("Setting {} {} for {}", KEY, LoliConfig.instance.alternateCurrent, event.getWorld().provider.getDimensionType().getName());
+            gameRules.addGameRule(KEY, Boolean.toString(LoliConfig.instance.alternateCurrent), GameRules.ValueType.BOOLEAN_VALUE);
         }
     }
 
