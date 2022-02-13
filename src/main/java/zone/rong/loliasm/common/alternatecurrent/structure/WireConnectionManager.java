@@ -35,10 +35,8 @@ public class WireConnectionManager {
     public WireConnectionManager(WireNode wire) {
         this.wire = wire;
         this.all = new WireConnection[Facings.HORIZONTAL.length];
-
         this.count = 0;
         this.indices = 0;
-
         this.flowTotal = 0;
         this.flow = -1;
     }
@@ -47,21 +45,17 @@ public class WireConnectionManager {
         if (count > 0) {
             clear();
         }
-
         for (int iDir = 0; iDir < Facings.HORIZONTAL.length; iDir++) {
             setIndex(iDir, count);
             setter.set(this::add, iDir);
         }
-
         setIndex(Facings.HORIZONTAL.length, count);
     }
 
     private void clear() {
         Arrays.fill(all, null);
-
         count = 0;
         indices = 0;
-
         flowTotal = 0;
         flow = -1;
     }
@@ -74,9 +68,7 @@ public class WireConnectionManager {
         if (count == all.length) {
             all = doubleSize(all);
         }
-
         all[count++] = connection;
-
         flowTotal |= (1 << connection.iDir);
         flow = WireHandler.FLOW_IN_TO_FLOW_OUT[flowTotal];
     }
@@ -105,11 +97,9 @@ public class WireConnectionManager {
 
     private static WireConnection[] doubleSize(WireConnection[] array) {
         WireConnection[] newArray = new WireConnection[array.length << 1];
-
         for (int index = 0; index < array.length; index++) {
             newArray[index] = array[index];
         }
-
         return newArray;
     }
 

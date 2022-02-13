@@ -13,9 +13,10 @@ import zone.rong.loliasm.common.alternatecurrent.IAlternateCurrentBlock;
 
 public class WorldAccess {
 
+    public static final IBlockState AIR = Blocks.AIR.getDefaultState();
+
     private static final int Y_MIN = 0;
     private static final int Y_MAX = 256;
-    private static final IBlockState AIR = Blocks.AIR.getDefaultState();
 
     private final WireBlock wireBlock;
     private final WorldServer world;
@@ -36,21 +37,16 @@ public class WorldAccess {
      */
     public IBlockState getBlockState(BlockPos pos) {
         int y = pos.getY();
-
         if (y < Y_MIN || y >= Y_MAX) {
             return AIR;
         }
-
         int x = pos.getX();
         int z = pos.getZ();
-
         Chunk chunk = world.getChunk(x >> 4, z >> 4);
         ExtendedBlockStorage section = chunk.getBlockStorageArray()[y >> 4];
-
         if (section == Chunk.NULL_BLOCK_STORAGE) {
             return AIR;
         }
-
         return section.get(x & 15, y & 15, z & 15);
     }
 
@@ -63,40 +59,29 @@ public class WorldAccess {
         if (!wireBlock.isOf(state)) {
             return false;
         }
-
         int y = pos.getY();
-
         if (y < Y_MIN || y >= Y_MAX) {
             return false;
         }
-
         int x = pos.getX();
         int z = pos.getZ();
-
         Chunk chunk = world.getChunk(x >> 4, z >> 4);
         ExtendedBlockStorage section = chunk.getBlockStorageArray()[y >> 4];
-
         if (section == null) {
             return false; // we should never get here
         }
-
         x &= 15;
         y &= 15;
         z &= 15;
-
         IBlockState prevState = section.get(x, y, z);
-
         if (state == prevState) {
             return false;
         }
-
         section.set(x, y, z, state);
-
         // notify clients of the IBlockState change
-        // world.getRaidManager().onBlockChange(pos);
+        world.getPlayerChunkMap().markBlockForUpdate(pos);
         // mark the chunk for saving
         chunk.markDirty();
-
         return true;
     }
 
@@ -108,7 +93,6 @@ public class WorldAccess {
     public void updateObserver(BlockPos pos, Block fromBlock, BlockPos fromPos) {
         IBlockState state = getBlockState(pos);
         Block block = state.getBlock();
-
         block.observedNeighborChange(state, world, pos, fromBlock, fromPos);
     }
 

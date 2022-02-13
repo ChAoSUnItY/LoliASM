@@ -44,7 +44,6 @@ public class Node {
             Node node = (Node) o;
             return world == node.world && pos.equals(node.pos);
         }
-
         return false;
     }
 
@@ -57,24 +56,19 @@ public class Node {
         if (wireBlock.isOf(state)) {
             throw new IllegalStateException("Cannot update a regular Node to a WireNode!");
         }
-
         if (clearNeighbors) {
             Arrays.fill(neighbors, null);
         }
-
         this.pos = pos.toImmutable();
         this.state = state;
         this.invalid = false;
-
         this.flags = 0;
-
         if (this.world.isConductor(this.pos, this.state)) {
             this.flags |= CONDUCTOR;
         }
         if (this.state.canProvidePower()) {
             this.flags |= REDSTONE;
         }
-
         return this;
     }
 

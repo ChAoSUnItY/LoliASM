@@ -38,12 +38,9 @@ public class WireNode extends Node {
 
     public WireNode(WireBlock wireBlock, WorldAccess world, BlockPos pos, IBlockState state) {
         super(wireBlock, world);
-
         this.pos = pos.toImmutable();
         this.state = state;
-
         this.connections = new WireConnectionManager(this);
-
         this.virtualPower = this.currentPower = this.wireBlock.getPower(this.world, this.pos, this.state);
     }
 
@@ -88,16 +85,12 @@ public class WireNode extends Node {
         if (removed) {
             return true;
         }
-
         state = world.getBlockState(pos);
-
         if (shouldBreak) {
             return world.breakBlock(pos, state);
         }
-
         currentPower = wireBlock.clampPower(virtualPower);
         state = wireBlock.updatePowerState(world, pos, state, currentPower);
-
         return world.setWireState(pos, state);
     }
 }
