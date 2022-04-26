@@ -25,6 +25,8 @@ public class LoliTransformer implements IClassTransformer {
     public static boolean isOptifineInstalled;
     public static boolean squashBakedQuads = LoliConfig.instance.squashBakedQuads;
 
+    public static final LoliPosTransformer POS_TRANSFORMER = LoliPosTransformer.INSTANCE;
+
     Multimap<String, Function<byte[], byte[]>> transformations;
 
     public LoliTransformer() {
@@ -134,10 +136,10 @@ public class LoliTransformer implements IClassTransformer {
             for (Function<byte[], byte[]> func : getBytes) {
                 transformedByteArray = func.apply(transformedByteArray);
             }
-            return transformedByteArray;
+            bytes = transformedByteArray;
         }
         // transformations.removeAll(transformedName);
-        return bytes;
+        return POS_TRANSFORMER.transform(name, transformedName, bytes);
     }
 
     private byte[] extendSupportingBakedQuadInstead(byte[] bytes) {

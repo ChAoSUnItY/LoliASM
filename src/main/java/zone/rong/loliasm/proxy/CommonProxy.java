@@ -20,6 +20,7 @@ import zone.rong.loliasm.common.java.JavaFixes;
 import zone.rong.loliasm.common.modfixes.betterwithmods.BWMBlastingOilOptimization;
 import zone.rong.loliasm.common.modfixes.ebwizardry.ArcaneLocks;
 import zone.rong.loliasm.config.LoliConfig;
+import zone.rong.loliasm.core.LoliPosTransformer;
 
 import java.lang.reflect.Field;
 import java.util.Map;
@@ -90,6 +91,12 @@ public class CommonProxy {
         if (LoliConfig.instance.filePermissionsCacheCanonicalization) {
             MinecraftForge.EVENT_BUS.register(JavaFixes.INSTANCE);
         }
+        LoliLogger.instance.warn("Amount of Classes that has BlockPos Field: {}", LoliPosTransformer.INSTANCE.amountOfClassesWithBlockPosFields);
+        LoliLogger.instance.warn("Amount of Classes that has a Method that takes BlockPos: {}", LoliPosTransformer.INSTANCE.amountOfClassesWithBlockPosFields);
+        LoliLogger.instance.warn("Amount of Classes that has a Method that returns BlockPos: {}", LoliPosTransformer.INSTANCE.amountOfClassesWithBlockPosFields);
+        LoliLogger.instance.warn("Amount of Total BlockPos Fields: {}", LoliPosTransformer.INSTANCE.blockPosFields);
+        LoliLogger.instance.warn("Amount of Methods that takes BlockPos: {}", LoliPosTransformer.INSTANCE.methodsTakeBlockPos);
+        LoliLogger.instance.warn("Amount of Methods that returns BlockPos: {}", LoliPosTransformer.INSTANCE.methodsGiveBlockPos);
     }
 
     private void invalidateLaunchClassLoaderCaches() {
