@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "chaos.unity.loliasm.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+  ],
+  "client": [
+    "DebugHudMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
