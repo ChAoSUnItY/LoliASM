@@ -6,13 +6,18 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
 import java.util.Locale;
+import java.util.function.BiConsumer;
 
 public class LoliStringPool {
     public static final int FILE_PERMISSIONS_ID = 1;
+    public static final int NBT_STRING_ID = 2;
+    public static final int NBT_COMPOUND_KEY_ID = 3;
     private static final Int2ObjectMap<InternalPool> POOLS = new Int2ObjectArrayMap<>();
 
     static {
         establishPool(-1, 12288, "", " ");
+        establishPool(NBT_STRING_ID, 4096);
+        establishPool(NBT_COMPOUND_KEY_ID, 2048);
         POOLS.defaultReturnValue(POOLS.get(-1));
     }
 
@@ -20,6 +25,10 @@ public class LoliStringPool {
         if (POOLS.containsKey(poolId))
             return;
         POOLS.put(poolId, new InternalPool(poolId, expectedSize, startingValues));
+    }
+
+    public static void foreach(BiConsumer<? super Integer, ? super InternalPool> functor) {
+        POOLS.forEach(functor);
     }
 
     public static InternalPool purgePool(int poolId) {

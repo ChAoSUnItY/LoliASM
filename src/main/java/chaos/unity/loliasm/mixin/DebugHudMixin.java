@@ -26,10 +26,12 @@ public abstract class DebugHudMixin {
             leftText.add("");
         }
 
-        int size = LoliStringPool.getSize();
-        long deduplicatedCount = LoliStringPool.getDeduplicatedCount();
+        LoliStringPool.foreach((id, pool) -> {
+            int size = LoliStringPool.getSize(id);
+            long deduplicatedCount = LoliStringPool.getDeduplicatedCount(id);
 
-        leftText.add(String.format("%s%s%s: %s strings processed. %s unique, %s deduplicated.", Formatting.AQUA, "<LoliASM>", Formatting.RESET, deduplicatedCount, size, deduplicatedCount - size));
+            leftText.add(String.format("%s%s%s String Pool %d: %s strings processed. %s unique, %s deduplicated.", Formatting.AQUA, "<LoliASM>", Formatting.RESET, id, deduplicatedCount, size, deduplicatedCount - size));
+        });
 
         return leftText;
     }

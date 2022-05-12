@@ -14,5 +14,6 @@ public class LoliASM implements ModInitializer {
         ServerWorldEvents.LOAD.register((server, world) -> {
             JavaFixes.INSTANCE.run();
         });
+
     }
 }
